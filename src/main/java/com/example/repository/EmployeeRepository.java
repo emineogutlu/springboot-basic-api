@@ -59,4 +59,20 @@ public class EmployeeRepository {
         employeeList.add(newEmployee);
         return newEmployee;
     }
+
+    public boolean deleteEmployee(String id) {
+       Employee deleteEmployee=null;
+        for(Employee employee : employeeList){
+            if(id.equals(employee.getId())){
+                deleteEmployee = employee;
+                break;
+
+            }
+        }
+        if(deleteEmployee ==null){
+          return false;
+        }
+        employeeList.remove(deleteEmployee);
+        return true;
+    }
 }
