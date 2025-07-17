@@ -1,11 +1,13 @@
 package com.example.repository;
 
 import com.example.model.Employee;
+import com.example.model.UpdateEmployeeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java. util.List;
+
 
 @Repository
 public class EmployeeRepository {
@@ -75,4 +77,36 @@ public class EmployeeRepository {
         employeeList.remove(deleteEmployee);
         return true;
     }
+    private Employee findEmployeeById(String id) {
+        Employee findEmployee =null;
+        for(Employee employee : employeeList){
+            if(employee.getId().equals(id)){
+               findEmployee = employee;
+               break;
+            }
+
+        }
+        return findEmployee;
+    }
+
+    public Employee updateEmployee(String id,UpdateEmployeeRequest request) {
+        Employee findEmployee = findEmployeeById(id);
+        if (findEmployee != null) {
+            deleteEmployee(id);
+
+            Employee updatedEmployee = new Employee();
+            updatedEmployee.setId(id);
+            updatedEmployee.setFirstName(request.getFirstName());
+            updatedEmployee.setLastName(request.getLastName());
+
+            employeeList.add(updatedEmployee);
+            return updatedEmployee;
+        }
+  return null;
+    }
+
+
+
+
+
 }
