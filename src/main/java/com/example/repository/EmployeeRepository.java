@@ -55,4 +55,8 @@ public class EmployeeRepository {
         }
         return employeeWithParams;
     }
+    public Employee saveEmployee(Employee newEmployee){
+        employeeList.add(newEmployee);
+        return newEmployee;
+    }
 }
